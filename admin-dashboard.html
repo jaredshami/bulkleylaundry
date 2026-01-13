@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Dashboard - Bulkley Laundry</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        body {
+            background: #f5f5f5;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .admin-header h1 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 28px;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+        }
+
+        .admin-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+
+        .add-news-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            height: fit-content;
+        }
+
+        .add-news-form h2 {
+            margin-top: 0;
+            color: var(--dark);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .add-news-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            height: fit-content;
+        }
+
+        .add-news-form h2 {
+            margin-top: 0;
+            color: var(--dark);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--light);
+            border-radius: 5px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            transition: var(--transition);
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="radio"],
+        .form-group input[type="checkbox"] {
+            width: auto;
+            padding: 0;
+            border: none;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .form-group label[style*="display: flex"] {
+            font-weight: normal !important;
+            margin-bottom: 8px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(243, 116, 19, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-submit,
+        .btn-clear {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: var(--secondary);
+        }
+
+        .btn-clear {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .btn-clear:hover {
+            background: #d0d0d0;
+        }
+
+        .news-list {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .news-list h2 {
+            margin-top: 0;
+            color: var(--dark);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .news-item {
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .news-info h3 {
+            margin: 0 0 10px 0;
+            color: var(--dark);
+            font-size: 18px;
+        }
+
+        .news-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .news-excerpt {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .news-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            min-width: 150px;
+            justify-content: flex-end;
+        }
+
+        .btn-edit,
+        .btn-delete,
+        .btn-view {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-edit {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #1f5476;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
+
+        .btn-unpublish,
+        .btn-publish {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-unpublish {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .btn-unpublish:hover {
+            background: #e0a800;
+        }
+
+        .btn-publish {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-publish:hover {
+            background: #218838;
+        }
+
+        .btn-view {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-view:hover {
+            background: #d55d0d;
+        }
+
+        .no-news {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .no-news p {
+            margin: 0;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+        }
+
+        .modal.show {
+            display: block;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 24px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--primary);
+        }
+
+        .add-news-btn {
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+
+        .add-news-btn:hover {
+            background: var(--secondary);
+        }
+
+        /* Tabs */
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .admin-tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+        }
+
+        .admin-tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .admin-tab-content {
+            display: none;
+        }
+
+        .admin-tab-content.active {
+            display: block;
+        }
+
+        /* Testimonials styles */
+        .testimonial-item {
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .testimonial-info h3 {
+            margin: 0 0 10px 0;
+            color: var(--dark);
+            font-size: 18px;
+        }
+
+        .testimonial-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .testimonial-rating {
+            color: #ffc107;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-text {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .testimonial-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-status.approved {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .testimonial-status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .testimonial-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .btn-approve,
+        .btn-remove {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-approve {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-approve:hover {
+            background: #218838;
+        }
+
+        .btn-remove {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-remove:hover {
+            background: #c82333;
+        }
+
+        .no-testimonials {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 20px auto;
+            }
+
+            .news-item {
+                flex-direction: column;
+            }
+
+            .news-actions {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body style="background: #f5f5f5; margin: 0; padding: 0;">
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>📰 Manage Latest News</h1>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <!-- News Modal -->
+        <div id="blog-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="form-title">Create News Article</h2>
+                    <button class="modal-close" onclick="closeModal()">&times;</button>
+                </div>
+                
+                <form id="blog-form">
+                    <div class="form-group">
+                        <label for="title">News Title *</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="author">Author *</label>
+                        <input type="text" id="author" name="author" value="Bulkley Laundry" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date *</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category *</label>
+                        <select id="category" name="category" required>
+                            <option value="">Select a category</option>
+                            <option value="Laundry">Laundry</option>
+                            <option value="Fabric Care">Fabric Care</option>
+                            <option value="Tips & Tricks">Tips & Tricks</option>
+                            <option value="Industry News">Industry News</option>
+                            <option value="Cleaning">Cleaning</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="excerpt">Excerpt *</label>
+                        <textarea id="excerpt" name="excerpt" required placeholder="Brief summary of the news article"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">Featured Image (Optional)</label>
+                        <div style="margin-bottom: 10px;">
+                            <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer; font-weight: normal;">
+                                <input type="radio" name="image-source" value="upload" checked style="margin-right: 8px;">
+                                Upload New Image
+                            </label>
+                            <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer; font-weight: normal;">
+                                <input type="radio" name="image-source" value="external" style="margin-right: 8px;">
+                                External Image URL
+                            </label>
+                            <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer; font-weight: normal;">
+                                <input type="radio" name="image-source" value="existing" style="margin-right: 8px;">
+                                Select Previously Uploaded
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer; font-weight: normal;">
+                                <input type="radio" name="image-source" value="none" style="margin-right: 8px;">
+                                Remove Image
+                            </label>
+                        </div>
+
+                        <!-- Upload New Image Section -->
+                        <div id="upload-section" style="display: block;">
+                            <input type="file" id="image" name="image" accept="image/*">
+                            <small style="display: block; margin-top: 5px; color: #666;">
+                                Max file size: 5MB. Supported formats: JPG, PNG, GIF, WebP
+                            </small>
+                        </div>
+
+                        <!-- External URL Section -->
+                        <div id="external-section" style="display: none;">
+                            <input type="url" id="external-image-url" name="external-image-url" placeholder="https://example.com/image.jpg">
+                            <small style="display: block; margin-top: 5px; color: #666;">
+                                Enter the full URL of the external image
+                            </small>
+                        </div>
+
+                        <!-- Previously Uploaded Section -->
+                        <div id="existing-section" style="display: none;">
+                            <select id="existing-images" name="existing-images">
+                                <option value="">Loading images...</option>
+                            </select>
+                            <small style="display: block; margin-top: 5px; color: #666;">
+                                Select from previously uploaded images
+                            </small>
+                        </div>
+
+                        <!-- Remove Image Section -->
+                        <div id="none-section" style="display: none;">
+                            <p style="color: #666; margin: 0;">The featured image will be removed from this news article.</p>
+                        </div>
+
+                        <div id="image-preview" style="margin-top: 10px; display: none;">
+                            <img id="preview-img" src="" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 5px;">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="video_url">YouTube Video URL (Optional)</label>
+                        <input type="url" id="video_url" name="video_url" placeholder="https://www.youtube.com/watch?v=...">
+                        <small style="display: block; margin-top: 5px; color: #666;">
+                            Paste the full YouTube video link (e.g., https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">Article Content *</label>
+                        <textarea id="content" name="content" required placeholder="Full article content (HTML supported)" style="min-height: 200px;"></textarea>
+                        <small style="display: block; margin-top: 5px; color: #666;">
+                            You can use HTML tags like &lt;h2&gt;, &lt;h3&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;li&gt;, etc.
+                        </small>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit" id="submit-btn">Save News Article</button>
+                        <button type="button" class="btn-clear" onclick="resetForm()">Clear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Admin Tabs -->
+        <div class="admin-tabs">
+            <button class="admin-tab-btn active" onclick="switchTab('blogs')">📰 Latest News</button>
+            <button class="admin-tab-btn" onclick="switchTab('testimonials')">⭐ Testimonials</button>
+        </div>
+
+        <div class="admin-content">
+            <!-- Latest News List -->
+            <div id="blogs-tab" class="admin-tab-content active">
+                <div class="news-list" style="grid-column: 1 / -1;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="margin: 0;">Latest News Articles</h2>
+                        <button class="add-news-btn" onclick="openModal()">+ Publish News</button>
+                    </div>
+                    <div id="blogs-container">
+                        <div class="no-news">
+                            <p>No news articles yet. Publish your first news item!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonials List -->
+            <div id="testimonials-tab" class="admin-tab-content">
+                <div class="news-list" style="grid-column: 1 / -1;">
+                    <h2>Manage Testimonials</h2>
+                    <div id="testimonials-container">
+                        <div class="no-testimonials">
+                            <p>No testimonials yet.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set today's date by default
+        document.getElementById('date').valueAsDate = new Date();
+
+        // Modal functions
+        function openModal() {
+            document.getElementById('form-title').textContent = 'Create News Article';
+            document.getElementById('submit-btn').textContent = 'Save News Article';
+            document.getElementById('blog-modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('blog-modal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('blog-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.admin-tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+
+            // Load testimonials if switching to testimonials tab
+            if (tabName === 'testimonials') {
+                loadTestimonials();
+            }
+        }
+
+        // Load testimonials
+        async function loadTestimonials() {
+            try {
+                const response = await fetch('assets/php/manage-testimonials.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'action=get_all'
+                });
+
+                const testimonials = await response.json();
+                const container = document.getElementById('testimonials-container');
+
+                if (!Array.isArray(testimonials) || testimonials.length === 0) {
+                    container.innerHTML = '<div class="no-testimonials"><p>No testimonials yet.</p></div>';
+                    return;
+                }
+
+                // Sort by date (newest first)
+                testimonials.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                container.innerHTML = testimonials.map(testimonial => {
+                    const stars = '★'.repeat(testimonial.rating);
+                    const statusClass = testimonial.approved ? 'approved' : 'pending';
+                    const statusText = testimonial.approved ? 'Approved' : 'Pending Review';
+                    
+                    return `
+                        <div class="testimonial-item">
+                            <div class="testimonial-status ${statusClass}">${statusText}</div>
+                            <div class="testimonial-info">
+                                <h3>${testimonial.author}</h3>
+                            </div>
+                            <div class="testimonial-meta">${testimonial.title} • ${testimonial.date}</div>
+                            <div class="testimonial-rating">${stars}</div>
+                            <p class="testimonial-text">"${testimonial.text}"</p>
+                            <div class="testimonial-actions">
+                                ${!testimonial.approved ? `<button class="btn-approve" onclick="approveTestimonial(${testimonial.id})">✓ Approve</button>` : ''}
+                                <button class="btn-remove" onclick="deleteTestimonial(${testimonial.id})">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading testimonials:', error);
+                document.getElementById('testimonials-container').innerHTML = '<div class="no-testimonials"><p>Error loading testimonials.</p></div>';
+            }
+        }
+
+        // Approve testimonial
+        async function approveTestimonial(id) {
+            if (!confirm('Are you sure you want to approve this testimonial?')) return;
+
+            try {
+                const response = await fetch('assets/php/manage-testimonials.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `action=approve&id=${id}`
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    loadTestimonials();
+                } else {
+                    alert('Error: ' + (data.message || 'Failed to approve testimonial'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error approving testimonial');
+            }
+        }
+
+        // Delete testimonial
+        async function deleteTestimonial(id) {
+            if (!confirm('Are you sure you want to delete this testimonial?')) return;
+
+            try {
+                const response = await fetch('assets/php/manage-testimonials.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `action=delete&id=${id}`
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    loadTestimonials();
+                } else {
+                    alert('Error: ' + (data.message || 'Failed to delete testimonial'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error deleting testimonial');
+            }
+        }
+
+        // Load previously uploaded images
+        async function loadPreviouslyUploadedImages() {
+            try {
+                const response = await fetch('assets/php/list-blog-images.php');
+                const images = await response.json();
+                const select = document.getElementById('existing-images');
+                
+                if (images.length > 0) {
+                    select.innerHTML = '<option value="">Choose an image...</option>' + 
+                        images.map(img => `<option value="${img.path}">${img.name}</option>`).join('');
+                } else {
+                    select.innerHTML = '<option value="">No previously uploaded images</option>';
+                }
+            } catch (error) {
+                console.error('Error loading images:', error);
+                document.getElementById('existing-images').innerHTML = '<option value="">Error loading images</option>';
+            }
+        }
+
+        // Image source toggle
+        document.querySelectorAll('input[name="image-source"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.getElementById('upload-section').style.display = this.value === 'upload' ? 'block' : 'none';
+                document.getElementById('external-section').style.display = this.value === 'external' ? 'block' : 'none';
+                document.getElementById('existing-section').style.display = this.value === 'existing' ? 'block' : 'none';
+                document.getElementById('none-section').style.display = this.value === 'none' ? 'block' : 'none';
+                
+                if (this.value === 'existing') {
+                    loadPreviouslyUploadedImages();
+                }
+                
+                // Clear the form's existing image data attribute when switching sources
+                delete document.getElementById('blog-form').dataset.existingImage;
+                
+                // Hide preview when removing image
+                if (this.value === 'none') {
+                    document.getElementById('image-preview').style.display = 'none';
+                }
+            });
+        });
+
+        // Image preview handler for file upload
+        document.getElementById('image').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const preview = document.getElementById('preview-img');
+                    preview.src = event.target.result;
+                    document.getElementById('image-preview').style.display = 'block';
+                    document.getElementById('blog-form').dataset.imageSource = 'upload';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // External image URL preview
+        document.getElementById('external-image-url').addEventListener('change', function(e) {
+            if (e.target.value) {
+                const preview = document.getElementById('preview-img');
+                preview.src = e.target.value;
+                document.getElementById('image-preview').style.display = 'block';
+                document.getElementById('blog-form').dataset.imageSource = 'external';
+            }
+        });
+
+        // Existing images selection preview
+        document.getElementById('existing-images').addEventListener('change', function(e) {
+            if (e.target.value) {
+                const preview = document.getElementById('preview-img');
+                preview.src = e.target.value;
+                document.getElementById('image-preview').style.display = 'block';
+                document.getElementById('blog-form').dataset.imageSource = 'existing';
+            } else {
+                // If user clears the selection, hide preview
+                document.getElementById('image-preview').style.display = 'none';
+            }
+        });
+
+        // Check authentication
+        function checkAuth() {
+            if (!sessionStorage.getItem('admin_token')) {
+                window.location.href = 'admin-login.html';
+            }
+        }
+
+        // Logout
+        function logout() {
+            sessionStorage.removeItem('admin_token');
+            window.location.href = 'admin-login.html';
+        }
+
+        // Load news articles
+        async function loadBlogs() {
+            try {
+                // Add cache buster to ensure fresh data
+                const response = await fetch('assets/data/blogs.json?t=' + Date.now());
+                const blogs = await response.json();
+                displayBlogs(blogs);
+            } catch (error) {
+                console.error('Error loading news articles:', error);
+                showMessage('Error loading news articles', 'error');
+            }
+        }
+
+        // Display news articles
+        function displayBlogs(blogs) {
+            const container = document.getElementById('blogs-container');
+            
+            if (blogs.length === 0) {
+                container.innerHTML = '<div class="no-news"><p>No news articles yet. Publish your first news item!</p></div>';
+                return;
+            }
+
+            // Sort by date descending
+            blogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            container.innerHTML = blogs.map(blog => {
+                const date = new Date(blog.date).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+                
+                return `
+                    <div class="news-item" data-blog-id="${blog.id}">
+                        <div class="news-info">
+                            <h3>${blog.title}</h3>
+                            <div class="news-meta">
+                                <strong>${date}</strong> • ${blog.category}
+                            </div>
+                            <div class="news-excerpt">${blog.excerpt}</div>
+                        </div>
+                        <div class="news-actions">
+                            <button class="btn-view" onclick="editBlog(${blog.id})">Edit News</button>
+                            ${blog.published !== false ? `<button class="btn-unpublish" onclick="unpublishBlog(${blog.id})">Unpublish</button>` : `<button class="btn-publish" onclick="republishBlog(${blog.id})">Republish</button>`}
+                            <button class="btn-delete" onclick="deleteBlog(${blog.id})">Delete</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Edit news article
+        async function editBlog(id) {
+            try {
+                // Add cache buster to ensure fresh data
+                const response = await fetch('assets/data/blogs.json?t=' + Date.now());
+                const blogs = await response.json();
+                const blog = blogs.find(b => b.id === id);
+                
+                if (!blog) return;
+
+                document.getElementById('form-title').textContent = 'Edit News Article';
+                document.getElementById('submit-btn').textContent = 'Update News Article';
+                document.getElementById('title').value = blog.title;
+                document.getElementById('author').value = blog.author;
+                document.getElementById('date').value = blog.date;
+                document.getElementById('category').value = blog.category;
+                document.getElementById('excerpt').value = blog.excerpt;
+                document.getElementById('content').value = blog.content;
+                document.getElementById('video_url').value = blog.video_url || '';
+                document.getElementById('blog-form').dataset.editId = id;
+                
+                // Show image preview if exists and set which source it is
+                if (blog.image_path) {
+                    document.getElementById('preview-img').src = blog.image_path;
+                    document.getElementById('image-preview').style.display = 'block';
+                    document.getElementById('blog-form').dataset.existingImage = blog.image_path;
+                    
+                    // Determine image source based on path pattern
+                    if (blog.image_path.includes('/images/blogs/blog-')) {
+                        // It's an uploaded image
+                        document.querySelector('input[name="image-source"][value="upload"]').checked = true;
+                        document.getElementById('upload-section').style.display = 'block';
+                        document.getElementById('external-section').style.display = 'none';
+                        document.getElementById('existing-section').style.display = 'none';
+                    } else if (blog.image_path.startsWith('http')) {
+                        // It's an external URL
+                        document.querySelector('input[name="image-source"][value="external"]').checked = true;
+                        document.getElementById('external-image-url').value = blog.image_path;
+                        document.getElementById('upload-section').style.display = 'none';
+                        document.getElementById('external-section').style.display = 'block';
+                        document.getElementById('existing-section').style.display = 'none';
+                    } else {
+                        // Treat as existing uploaded image
+                        document.querySelector('input[name="image-source"][value="existing"]').checked = true;
+                        document.getElementById('upload-section').style.display = 'none';
+                        document.getElementById('external-section').style.display = 'none';
+                        document.getElementById('existing-section').style.display = 'block';
+                        loadPreviouslyUploadedImages().then(() => {
+                            // Set the select value after images are loaded
+                            document.getElementById('existing-images').value = blog.image_path;
+                        });
+                    }
+                } else {
+                    // Reset to default upload mode
+                    document.querySelector('input[name="image-source"][value="upload"]').checked = true;
+                    document.getElementById('upload-section').style.display = 'block';
+                    document.getElementById('external-section').style.display = 'none';
+                    document.getElementById('existing-section').style.display = 'none';
+                    document.getElementById('none-section').style.display = 'none';
+                    document.getElementById('image-preview').style.display = 'none';
+                }
+
+                // Open modal
+                openModal();
+            } catch (error) {
+                console.error('Error editing news article:', error);
+            }
+        }
+
+        // Unpublish news
+        function unpublishBlog(id) {
+            if (!confirm('Are you sure you want to unpublish this news item?')) return;
+
+            const blogItem = document.querySelector(`[data-blog-id="${id}"]`);
+            if (blogItem) {
+                blogItem.style.opacity = '0.5';
+                blogItem.style.pointerEvents = 'none';
+            }
+
+            fetch('assets/php/update-blog-status.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: id, published: false })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    showMessage('News item unpublished', 'success');
+                    // Restore opacity and reload
+                    if (blogItem) {
+                        blogItem.style.opacity = '1';
+                        blogItem.style.pointerEvents = 'auto';
+                    }
+                    loadBlogs();
+                } else {
+                    if (blogItem) {
+                        blogItem.style.opacity = '1';
+                        blogItem.style.pointerEvents = 'auto';
+                    }
+                    showMessage('Error unpublishing news item', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error unpublishing news item:', error);
+                if (blogItem) {
+                    blogItem.style.opacity = '1';
+                    blogItem.style.pointerEvents = 'auto';
+                }
+                showMessage('Error unpublishing news item: ' + error.message, 'error');
+            });
+        }
+
+        // Republish news
+        function republishBlog(id) {
+            if (!confirm('Are you sure you want to republish this news item?')) return;
+
+            const blogItem = document.querySelector(`[data-blog-id="${id}"]`);
+            if (blogItem) {
+                blogItem.style.opacity = '0.5';
+                blogItem.style.pointerEvents = 'none';
+            }
+
+            fetch('assets/php/update-blog-status.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: id, published: true })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    showMessage('News item republished', 'success');
+                    // Restore opacity and reload
+                    if (blogItem) {
+                        blogItem.style.opacity = '1';
+                        blogItem.style.pointerEvents = 'auto';
+                    }
+                    loadBlogs();
+                } else {
+                    if (blogItem) {
+                        blogItem.style.opacity = '1';
+                        blogItem.style.pointerEvents = 'auto';
+                    }
+                    showMessage(result.error || 'Error republishing news item', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error republishing news item:', error);
+                if (blogItem) {
+                    blogItem.style.opacity = '1';
+                    blogItem.style.pointerEvents = 'auto';
+                }
+                showMessage('Error republishing news item: ' + error.message, 'error');
+            });
+        }
+
+        // Delete blog
+        function deleteBlog(id) {
+            if (!confirm('Are you sure you want to delete this news item?')) return;
+
+            // Remove from DOM immediately
+            const blogItem = document.querySelector(`[data-blog-id="${id}"]`);
+            if (blogItem) {
+                blogItem.style.opacity = '0.5';
+                blogItem.style.pointerEvents = 'none';
+            }
+
+            // Send delete request in background without awaiting
+            fetch('assets/php/delete-blog.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: id })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    // Fade out and remove
+                    if (blogItem) {
+                        blogItem.style.transition = 'opacity 0.3s ease';
+                        setTimeout(() => blogItem.remove(), 300);
+                    }
+                    showMessage('News item deleted successfully', 'success');
+                } else {
+                    // Restore opacity on error
+                    if (blogItem) {
+                        blogItem.style.opacity = '1';
+                        blogItem.style.pointerEvents = 'auto';
+                    }
+                    showMessage(result.error || 'Error deleting news item', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting news item:', error);
+                // Restore opacity on error
+                if (blogItem) {
+                    blogItem.style.opacity = '1';
+                    blogItem.style.pointerEvents = 'auto';
+                }
+                showMessage('Error deleting news item: ' + error.message, 'error');
+            });
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('blog-form').reset();
+            document.getElementById('form-title').textContent = 'Create News Article';
+            document.getElementById('submit-btn').textContent = 'Save News Article';
+            document.getElementById('date').valueAsDate = new Date();
+            document.getElementById('image-preview').style.display = 'none';
+            document.getElementById('external-image-url').value = '';
+            document.getElementById('existing-images').value = '';
+            document.querySelector('input[name="image-source"][value="upload"]').checked = true;
+            document.getElementById('upload-section').style.display = 'block';
+            document.getElementById('external-section').style.display = 'none';
+            document.getElementById('existing-section').style.display = 'none';
+            document.getElementById('none-section').style.display = 'none';
+            delete document.getElementById('blog-form').dataset.editId;
+            delete document.getElementById('blog-form').dataset.existingImage;
+        }
+
+        // Show message
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = 'message ' + type;
+            messageDiv.style.display = 'block';
+            setTimeout(() => { messageDiv.style.display = 'none'; }, 4000);
+        }
+
+        // Extract YouTube video ID from URL
+        function extractYouTubeId(url) {
+            if (!url) return null;
+            const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.{11})/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+
+        // Handle form submission
+        document.getElementById('blog-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('title').value.trim();
+            const author = document.getElementById('author').value.trim();
+            const date = document.getElementById('date').value;
+            const category = document.getElementById('category').value;
+            const excerpt = document.getElementById('excerpt').value.trim();
+            const content = document.getElementById('content').value.trim();
+            const video_url = document.getElementById('video_url').value.trim();
+            const editId = parseInt(this.dataset.editId) || null;
+
+            console.log('Form submitted with:', { title, author, date, category, excerpt, editId });
+
+            if (!title || !author || !date || !category || !excerpt || !content) {
+                showMessage('Please fill in all required fields', 'error');
+                return;
+            }
+
+            // Validate YouTube URL if provided
+            if (video_url && !extractYouTubeId(video_url)) {
+                showMessage('Invalid YouTube URL format', 'error');
+                return;
+            }
+
+            try {
+                // Add cache buster to ensure fresh data
+                const response = await fetch('assets/data/blogs.json?t=' + Date.now());
+                let blogs = await response.json();
+
+                let newBlogId;
+                if (editId) {
+                    // Edit existing blog
+                    newBlogId = editId;
+                } else {
+                    // Add new blog - generate new ID
+                    newBlogId = Math.max(...blogs.map(b => b.id), 0) + 1;
+                }
+
+                let imagePath = null;
+
+                // Determine which image source is selected
+                const imageSource = document.querySelector('input[name="image-source"]:checked').value;
+
+                if (imageSource === 'upload') {
+                    const imageFile = document.getElementById('image').files[0];
+                    if (imageFile) {
+                        const formData = new FormData();
+                        formData.append('image', imageFile);
+
+                        try {
+                            const uploadResponse = await fetch('assets/php/upload-blog-image.php', {
+                                method: 'POST',
+                                body: formData
+                            });
+
+                            if (!uploadResponse.ok) {
+                                const errorData = await uploadResponse.json();
+                                showMessage('Image upload error: ' + (errorData.error || 'Unknown error'), 'error');
+                                return;
+                            }
+
+                            const uploadData = await uploadResponse.json();
+                            imagePath = uploadData.file_path;
+                        } catch (uploadError) {
+                            console.error('Image upload error:', uploadError);
+                            showMessage('Failed to upload image: ' + uploadError.message, 'error');
+                            return;
+                        }
+                    } else if (editId && this.dataset.existingImage) {
+                        // If editing and no new file selected, keep existing image
+                        imagePath = this.dataset.existingImage;
+                    }
+                } else if (imageSource === 'external') {
+                    imagePath = document.getElementById('external-image-url').value.trim();
+                    if (!imagePath) {
+                        showMessage('Please enter an external image URL', 'error');
+                        return;
+                    }
+                } else if (imageSource === 'existing') {
+                    imagePath = document.getElementById('existing-images').value;
+                    if (!imagePath) {
+                        // If editing and no selection made, keep existing image
+                        if (editId && this.dataset.existingImage) {
+                            imagePath = this.dataset.existingImage;
+                        } else {
+                            showMessage('Please select a previously uploaded image or choose a different image source', 'error');
+                            return;
+                        }
+                    }
+                } else if (imageSource === 'none') {
+                    // User explicitly chose to remove the image
+                    imagePath = null;
+                }
+
+                // Prepare blog object
+                const blogData = {
+                    id: newBlogId,
+                    title,
+                    slug: title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, ''),
+                    date,
+                    author,
+                    category,
+                    excerpt,
+                    content,
+                    image_path: imagePath,
+                    video_url: video_url || null
+                };
+
+                console.log('Sending blog data to PHP:', blogData);
+
+                // Send to PHP backend to save individual blog file
+                const saveResponse = await fetch('assets/php/save-blogs.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(blogData)
+                });
+
+                console.log('Save response status:', saveResponse.status, saveResponse.ok);
+
+                if (!saveResponse.ok) {
+                    const errorText = await saveResponse.text();
+                    console.error('PHP Error Response:', errorText);
+                    try {
+                        const errorData = JSON.parse(errorText);
+                        showMessage('Error: ' + (errorData.error || 'Failed to save news'), 'error');
+                    } catch (e) {
+                        showMessage('Error: ' + errorText, 'error');
+                    }
+                    return;
+                }
+
+                const result = await saveResponse.json();
+                console.log('Save result:', result);
+                showMessage(editId ? 'News article updated!' : 'News article saved as draft! Click the Publish button to make it live.', 'success');
+                resetForm();
+                closeModal();
+                // Switch to blogs tab to see the new item
+                document.querySelectorAll('.admin-tab-content').forEach(tab => tab.classList.remove('active'));
+                document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
+                document.getElementById('blogs-tab').classList.add('active');
+                // Find the blogs tab button and activate it
+                const blogsTabBtn = Array.from(document.querySelectorAll('.admin-tab-btn')).find(btn => btn.textContent.includes('Latest News'));
+                if (blogsTabBtn) {
+                    blogsTabBtn.classList.add('active');
+                }
+                await loadBlogs();
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('Error saving news article: ' + error.message, 'error');
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            loadBlogs();
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="News post from Bulkley Laundry">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Latest News - Bulkley Laundry">
+    <meta property="og:description" content="News post from Bulkley Laundry">
+    
+    <title>News - Bulkley Laundry</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .news-post-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .news-post-content {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .news-featured-media {
+            width: 100%;
+            margin: -60px -40px 40px -40px;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+        }
+
+        .news-featured-image {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        .news-video-container {
+            width: 100%;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+
+        .news-video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .news-post-header {
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 30px;
+        }
+
+        .news-post-content h1 {
+            font-size: 42px;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .news-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .news-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .news-category {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .news-body {
+            color: #444;
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        .news-body h2 {
+            font-size: 28px;
+            color: var(--dark);
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .news-body h3 {
+            font-size: 22px;
+            color: var(--secondary);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .news-body p {
+            margin-bottom: 20px;
+        }
+
+        .news-body ul,
+        .news-body ol {
+            margin-bottom: 20px;
+            margin-left: 30px;
+        }
+
+        .news-body li {
+            margin-bottom: 10px;
+        }
+
+        .news-footer {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--light);
+            text-align: center;
+        }
+
+        .back-to-news {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-bottom: 30px;
+        }
+
+        .back-to-news:hover {
+            color: var(--secondary);
+        }
+
+        .news-not-found {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .news-not-found h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <img src="assets/images/logo.webp" alt="Bulkley Laundry Logo" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Services</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services/self-service.html">Self-Service Laundromat</a></li>
+                            <li><a href="services/pickup-delivery.html">Pickup & Delivery</a></li>
+                            <li><a href="services/airbnb.html">Airbnb Linen Service</a></li>
+                            <li><a href="services/hotel.html">Hotel Linen Service</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="services/dry-cleaning.html">Dry Cleaning</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="latest-news.html">Latest News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- News Post Section -->
+    <section class="news-post-section" style="padding: 80px 0; background: #f9f9f9; min-height: 60vh;">
+        <div class="news-post-container">
+            <a href="latest-news.html" class="back-to-news">← Back to Latest News</a>
+            <div id="news-post-container">
+                <!-- News post will be loaded here by JavaScript -->
+                <div class="news-not-found">
+                    <h2>News Post Not Found</h2>
+                    <p><a href="latest-news.html">Return to Latest News</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html#wash-fold">Wash & Fold</a></li>
+                        <li><a href="services.html#dry-cleaning">Dry Cleaning</a></li>
+                        <li><a href="services.html#alterations">Alterations</a></li>
+                        <li><a href="services.html#pickup-delivery">Pickup & Delivery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://facebook.com/bulkleylaundry">Facebook</a>
+                        <a href="https://instagram.com/bulkleylaundry">Instagram</a>
+                        <a href="https://twitter.com/bulkleylaundry">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bulkley Laundry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        // Load and display individual news post
+        async function loadBlogPost() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const blogId = parseInt(urlParams.get('id'));
+                
+                if (!blogId) {
+                    console.error('No news ID provided');
+                    return; // Show not found
+                }
+                
+                // Try to load the individual news file first
+                let blog = null;
+                try {
+                    const blogFileResponse = await fetch('blogs/' + blogId + '.json');
+                    if (blogFileResponse.ok) {
+                        blog = await blogFileResponse.json();
+                    }
+                } catch (e) {
+                    console.log('Individual news file not found, trying index');
+                }
+
+                // If individual file not found, try the index
+                if (!blog) {
+                    const indexResponse = await fetch('assets/data/blogs.json');
+                    const blogs = await indexResponse.json();
+                    blog = blogs.find(b => b.id === blogId && b.published !== false);
+                }
+                
+                if (!blog) {
+                    return; // Show not found
+                }
+                
+                const date = new Date(blog.date);
+                const formattedDate = date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                
+                // Update page title and meta tags
+                document.title = blog.title + ' - Bulkley Laundry News';
+                
+                // Safely update meta tags (they might not exist)
+                const descMeta = document.querySelector('meta[name="description"]');
+                if (descMeta) descMeta.content = blog.excerpt;
+                
+                const ogTitle = document.querySelector('meta[property="og:title"]');
+                if (ogTitle) ogTitle.content = blog.title;
+                
+                const ogDesc = document.querySelector('meta[property="og:description"]');
+                if (ogDesc) ogDesc.content = blog.excerpt;
+                
+                const container = document.getElementById('news-post-container');
+                if (!container) {
+                    console.error('Container not found');
+                    return;
+                }
+                
+                // Build media HTML (image or video)
+                let mediaHtml = '';
+                if (blog.video_url) {
+                    // Extract YouTube video ID and create embed
+                    const videoId = blog.video_url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/)?.[1];
+                    if (videoId) {
+                        mediaHtml = `
+                            <div class="news-video-container">
+                                <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1" 
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen>
+                                </iframe>
+                            </div>
+                        `;
+                    }
+                } else if (blog.image_path) {
+                    mediaHtml = `
+                        <div class="news-featured-media">
+                            <img src="${blog.image_path}" alt="${blog.title}" class="news-featured-image">
+                        </div>
+                    `;
+                }
+                
+                container.innerHTML = `
+                    <article class="news-post-content">
+                        ${mediaHtml}
+                        <div class="news-post-header">
+                            <h1>${blog.title}</h1>
+                            <div class="news-meta">
+                                <span class="news-meta-item">📅 ${formattedDate}</span>
+                                <span class="news-meta-item">✍️ ${blog.author}</span>
+                                <span class="news-category">${blog.category}</span>
+                            </div>
+                        </div>
+                        <div class="news-body">
+                            ${blog.content}
+                        </div>
+                        <div class="news-footer">
+                            <a href="latest-news.html" class="back-to-news">← Back to Latest News</a>
+                        </div>
+                    </article>
+                `;
+            } catch (error) {
+                console.error('Error loading news post:', error);
+            }
+        }
+        
+        // Load news post when page loads
+        document.addEventListener('DOMContentLoaded', loadBlogPost);
+    </script>
+</body>
+</html>
+

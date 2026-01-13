@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "title": "Test",
+        "slug": "test",
+        "date": "2026-01-08",
+        "author": "Bulkley Laundry",
+        "category": "Laundry",
+        "excerpt": "Hello",
+        "content": "Heloo again my friend",
+        "image_path": "https://www.realsimple.com/thmb/pOT5n1Y1-bIxTNRFfUnnM8woWyk=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ultimate-guide-to-laundry-GettyImages-1318399310-a636429e8e9948aca141c3cc5ef679d2.jpg",
+        "video_url": null
+    }
+]

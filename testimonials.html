@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read testimonials from satisfied customers of Bulkley Laundry. See why our clients trust us with their laundry needs.">
+    <meta name="keywords" content="testimonials, customer reviews, Bulkley Laundry reviews, laundry service reviews">
+    <meta property="og:title" content="Testimonials - Bulkley Laundry">
+    <meta property="og:description" content="See what our satisfied customers say about Bulkley Laundry.">
+    <meta property="og:url" content="https://bulkleylaundry.com/testimonials.html">
+    
+    <title>Testimonials - Bulkley Laundry Customer Reviews</title>
+    <link rel="canonical" href="https://bulkleylaundry.com/testimonials.html">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .testimonial-stars {
+            color: #ffc107;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .testimonial-title {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .add-testimonial-cta {
+            text-align: center;
+            padding: 40px 20px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+
+        .add-testimonial-cta h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .add-testimonial-cta p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .btn-add-testimonial {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-add-testimonial:hover {
+            background: var(--secondary);
+        }
+
+        .no-testimonials {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <img src="assets/images/logo.webp" alt="Bulkley Laundry Logo" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Services</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services/self-service.html">Self-Service Laundromat</a></li>
+                            <li><a href="services/pickup-delivery.html">Pickup & Delivery</a></li>
+                            <li><a href="services/airbnb.html">Airbnb Linen Service</a></li>
+                            <li><a href="services/hotel.html">Hotel Linen Service</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="services/dry-cleaning.html">Dry Cleaning</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="latest-news.html">Latest News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Testimonials</h1>
+            <p>Hear from our satisfied customers</p>
+        </div>
+    </section>
+
+    <!-- Page Header Background Image -->
+    <style>
+        .page-header {
+            background-image: url('assets/images/hero/hero-testimonials.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" style="padding: 80px 0;">
+        <div class="container">
+            <div id="testimonialsContainer" class="testimonials-grid"></div>
+            
+            <div class="add-testimonial-cta">
+                <h3>Share Your Experience</h3>
+                <p>Have you used Bulkley Laundry? We'd love to hear about your experience!</p>
+                <a href="add-testimonial.html" class="btn-add-testimonial">Submit Your Testimonial</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer"></footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/fragments.js"></script>
+    <script>
+        // Load testimonials from JSON
+        async function loadTestimonials() {
+            try {
+                const response = await fetch('assets/data/testimonials.json');
+                const testimonials = await response.json();
+                
+                // Filter only approved testimonials
+                const approvedTestimonials = testimonials.filter(t => t.approved === true);
+                
+                const container = document.getElementById('testimonialsContainer');
+                
+                if (approvedTestimonials.length === 0) {
+                    container.innerHTML = '<div class="no-testimonials"><p>No testimonials yet. Be the first to share your experience!</p></div>';
+                    return;
+                }
+                
+                // Sort by date (newest first)
+                approvedTestimonials.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                container.innerHTML = approvedTestimonials.map(testimonial => {
+                    const stars = '★'.repeat(testimonial.rating);
+                    return `
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">${stars}</div>
+                            <p class="testimonial-text">"${testimonial.text}"</p>
+                            <div class="testimonial-author">${testimonial.author}</div>
+                            <div class="testimonial-title">${testimonial.title}</div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading testimonials:', error);
+                document.getElementById('testimonialsContainer').innerHTML = '<div class="no-testimonials"><p>Unable to load testimonials. Please try again later.</p></div>';
+            }
+        }
+        
+        // Load testimonials on page load
+        document.addEventListener('DOMContentLoaded', loadTestimonials);
+    </script>
+</body>
+</html>

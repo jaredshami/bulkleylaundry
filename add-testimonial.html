@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Share your experience with Bulkley Laundry. Submit a testimonial and let others know why you love our services.">
+    <meta name="keywords" content="testimonial form, customer review, Bulkley Laundry feedback">
+    <title>Submit a Testimonial - Bulkley Laundry</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .testimonial-form-container {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .testimonial-form {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-form h1 {
+            text-align: center;
+            color: var(--dark);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .form-intro {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--light);
+            border-radius: 5px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            transition: var(--transition);
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(243, 116, 19, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .rating-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 10px;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .star {
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star:hover,
+        .star.active {
+            color: #ffc107;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn-submit,
+        .btn-clear {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: var(--secondary);
+        }
+
+        .btn-clear {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .btn-clear:hover {
+            background: #d0d0d0;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .approval-notice {
+            background: #e7f3ff;
+            color: #0056b3;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <img src="assets/images/logo.webp" alt="Bulkley Laundry Logo" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Services</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services/self-service.html">Self-Service Laundromat</a></li>
+                            <li><a href="services/pickup-delivery.html">Pickup & Delivery</a></li>
+                            <li><a href="services/airbnb.html">Airbnb Linen Service</a></li>
+                            <li><a href="services/hotel.html">Hotel Linen Service</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="services/dry-cleaning.html">Dry Cleaning</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="latest-news.html">Latest News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Submit Your Testimonial</h1>
+            <p>Share your experience with Bulkley Laundry</p>
+        </div>
+    </section>
+
+    <!-- Testimonial Form Section -->
+    <section style="padding: 80px 0;">
+        <div class="testimonial-form-container">
+            <div class="approval-notice">
+                <strong>Thank you for your feedback!</strong> Your testimonial will be reviewed by our team before appearing on our testimonials page.
+            </div>
+
+            <form class="testimonial-form" id="testimonialForm">
+                <h1>Share Your Experience</h1>
+                <p class="form-intro">Help other customers learn why we're their trusted laundry service partner.</p>
+
+                <div id="message" class="message"></div>
+
+                <div class="form-group">
+                    <label for="author">Your Name <span class="required">*</span></label>
+                    <input type="text" id="author" name="author" required placeholder="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Your Role/Title <span class="required">*</span></label>
+                    <input type="text" id="title" name="title" required placeholder="e.g., Busy Professional, Airbnb Host">
+                </div>
+
+                <div class="form-group">
+                    <label for="rating">Rating <span class="required">*</span></label>
+                    <div class="star-rating" id="starRating">
+                        <span class="star" data-rating="1">★</span>
+                        <span class="star" data-rating="2">★</span>
+                        <span class="star" data-rating="3">★</span>
+                        <span class="star" data-rating="4">★</span>
+                        <span class="star" data-rating="5">★</span>
+                    </div>
+                    <input type="hidden" id="rating" name="rating" required value="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="text">Your Testimonial <span class="required">*</span></label>
+                    <textarea id="text" name="text" required placeholder="Share your experience with our services. What makes Bulkley Laundry special to you?"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Submit Testimonial</button>
+                    <button type="reset" class="btn-clear">Clear Form</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer"></footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/fragments.js"></script>
+    <script>
+        const starRating = document.getElementById('starRating');
+        const ratingInput = document.getElementById('rating');
+        const stars = starRating.querySelectorAll('.star');
+
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.getAttribute('data-rating');
+                ratingInput.value = rating;
+                
+                stars.forEach(s => {
+                    if (s.getAttribute('data-rating') <= rating) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            });
+
+            star.addEventListener('mouseover', function() {
+                const rating = this.getAttribute('data-rating');
+                stars.forEach(s => {
+                    if (s.getAttribute('data-rating') <= rating) {
+                        s.style.color = '#ffc107';
+                    } else {
+                        s.style.color = '#ddd';
+                    }
+                });
+            });
+        });
+
+        starRating.addEventListener('mouseout', function() {
+            const currentRating = ratingInput.value;
+            stars.forEach(s => {
+                if (s.getAttribute('data-rating') <= currentRating) {
+                    s.style.color = '#ffc107';
+                } else {
+                    s.style.color = '#ddd';
+                }
+            });
+        });
+
+        const form = document.getElementById('testimonialForm');
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            
+            try {
+                const response = await fetch('assets/php/save-testimonial.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                const messageDiv = document.getElementById('message');
+
+                if (data.success) {
+                    messageDiv.className = 'message success';
+                    messageDiv.innerHTML = '<strong>Success!</strong> Your testimonial has been submitted. Thank you for your feedback!';
+                    messageDiv.style.display = 'block';
+                    form.reset();
+                    ratingInput.value = 0;
+                    stars.forEach(s => s.classList.remove('active'));
+                    
+                    setTimeout(() => {
+                        window.location.href = 'testimonials.html';
+                    }, 3000);
+                } else {
+                    messageDiv.className = 'message error';
+                    messageDiv.innerHTML = '<strong>Error:</strong> ' + (data.message || 'Failed to submit testimonial. Please try again.');
+                    messageDiv.style.display = 'block';
+                }
+            } catch (error) {
+                const messageDiv = document.getElementById('message');
+                messageDiv.className = 'message error';
+                messageDiv.innerHTML = '<strong>Error:</strong> An error occurred. Please try again.';
+                messageDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+# Robots.txt for Bulkley Laundry
+# Allow search engines to crawl all pages
+
+User-agent: *
+Allow: /
+Allow: *.html
+Allow: *.css
+Allow: *.js
+
+# Disallow admin, private, or sensitive areas (if applicable)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Specify sitemap location
+Sitemap: https://bulkleylaundry.com/sitemap.xml
+
+# Crawl delay (optional - adjust as needed)
+Crawl-delay: 1
+
+# Allow specific search engines for better indexing
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Block bad bots (optional)
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /

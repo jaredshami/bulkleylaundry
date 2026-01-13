@@ -1,0 +1,118 @@
+# How to Add Your Images
+
+## Quick Start Steps
+
+### 1. Download Free Images
+
+**Option A: Use Unsplash (Recommended for laundry business)**
+- Go to https://unsplash.com
+- Search: "laundry services", "clean clothes", "professional cleaning", "delivery service"
+- Download high-resolution images
+- Save to appropriate folders:
+  - Hero images → `/images/hero/`
+  - Service images → `/images/services/`
+  - About/team images → `/images/about/`
+
+**Option B: Use Canva (Create custom graphics)**
+- Go to https://canva.com
+- Create designs for service cards
+- Export as JPG
+- Save to appropriate folders
+
+**Option C: AI Generate Images**
+- Midjourney, DALL-E, or Stable Diffusion
+- Prompts to use:
+  - "Professional laundry service, clean clothes on hanger, modern laundry facility"
+  - "Delivery person holding laundry bag, smiling customer"
+  - "Professional dry cleaning rack with pressed garments"
+  - "Team of laundry professionals at modern facility"
+
+### 2. Optimize Your Images
+
+Use these free tools to compress images:
+- **TinyPNG**: https://tinypng.com (drag & drop)
+- **Squoosh**: https://squoosh.app (Google's tool)
+- **ImageOptim**: For Mac users
+
+### 3. File Organization
+
+```
+images/
+├── hero/
+│   ├── hero-home.jpg
+│   ├── hero-services.jpg
+│   ├── hero-about.jpg
+│   ├── hero-pricing.jpg
+│   └── hero-contact.jpg
+├── services/
+│   ├── wash-fold.jpg
+│   ├── dry-cleaning.jpg
+│   ├── alterations.jpg
+│   ├── pickup-delivery.jpg
+│   ├── express-service.jpg
+│   └── eco-friendly.jpg
+├── about/
+│   ├── location.jpg
+│   ├── team.jpg
+│   └── equipment.jpg
+└── README.md
+```
+
+### 4. Upload Images to Your Site
+
+1. Resize images to recommended dimensions (see README.md)
+2. Compress using TinyPNG or Squoosh
+3. Upload to the appropriate folder
+4. No code changes needed - images will display automatically!
+
+## Recommended Image Specifications
+
+| Location | Dimensions | Max Size | Format |
+|----------|-----------|----------|--------|
+| Hero images | 1920x600px | 250KB | JPG |
+| Service cards | 600x400px | 120KB | JPG |
+| About section | 800x600px | 180KB | JPG |
+| Background overlay | 1920x1080px | 300KB | JPG |
+
+## Search Queries for Free Stock Photos
+
+### Unsplash/Pexels searches:
+- "laundry services professional"
+- "clean white clothes"
+- "laundry business owner"
+- "dry cleaning service"
+- "delivery person"
+- "professional cleaning equipment"
+- "happy customer"
+- "eco friendly" + "laundry"
+- "washing machine"
+- "ironing service"
+
+## Image Alt Text (Already Optimized)
+
+All images have SEO-optimized alt text for:
+- ✅ Google Image Search
+- ✅ Accessibility (screen readers)
+- ✅ User experience (broken image fallback)
+
+Examples included:
+- "Professional wash and fold laundry service"
+- "Expert dry cleaning for delicate garments"
+- "Bulkley Laundry professional team members"
+
+## What if I don't have images yet?
+
+The site will work fine without images! Placeholder styling is in place, so:
+1. Site looks great with or without images
+2. Add images whenever you're ready
+3. No code changes required - just upload and go!
+
+## Need Help?
+
+For free laundry business images, try:
+1. **Unsplash** (unsplash.com) - Huge collection
+2. **Pexels** (pexels.com) - Great quality
+3. **Pixabay** (pixabay.com) - Diverse selection
+4. **Canva** (canva.com) - Create your own
+
+All are 100% free to use commercially!
