@@ -263,7 +263,7 @@
                 // Try to load the individual news file first
                 let blog = null;
                 try {
-                    const blogFileResponse = await fetch('blogs/' + blogId + '.json');
+                    const blogFileResponse = await fetch('assets/data/blogs/' + blogId + '.json');
                     if (blogFileResponse.ok) {
                         blog = await blogFileResponse.json();
                     }
@@ -273,7 +273,7 @@
 
                 // If individual file not found, try the index
                 if (!blog) {
-                    const indexResponse = await fetch('assets/data/blogs.json');
+                    const indexResponse = await fetch('assets/data/latest-news.json');
                     const blogs = await indexResponse.json();
                     blog = blogs.find(b => b.id === blogId && b.published !== false);
                 }

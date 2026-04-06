@@ -231,7 +231,7 @@
     <!-- Page Header Background Image -->
     <style>
         .page-header {
-            background-image: url('assets/images/hero/hero-blog.jpg');
+            background-image: url('assets/images/soap-suds.png');
             background-size: cover;
             background-position: center;
         }
@@ -255,26 +255,22 @@
 
     <script src="assets/js/script.js"></script>
     <script src="assets/js/fragments.js"></script>
-</body>
-</html>
-
-    <script src="assets/js/script.js"></script>
     <script>
-        // Load and display news posts
-        async function loadBlogPosts() {
+        // Load and display latest news posts
+        async function loadLatestNews() {
             try {
-                const response = await fetch('assets/data/blogs.json');
-                const blogs = await response.json();
+                const response = await fetch('assets/data/latest-news.json');
+                const news_items = await response.json();
                 
-                // Filter only published news
-                const publishedBlogs = blogs.filter(blog => blog.published !== false);
+                // Filter only published news items
+                const publishedNews = news_items.filter(item => item.published !== false);
                 
                 // Sort news by date in reverse order (newest first)
-                publishedBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+                publishedNews.sort((a, b) => new Date(b.date) - new Date(a.date));
                 
                 const container = document.getElementById('news-posts-container');
                 
-                if (publishedBlogs.length === 0) {
+                if (publishedNews.length === 0) {
                     container.innerHTML = `
                         <div class="no-posts">
                             <h3>No news posts yet</h3>
@@ -284,8 +280,8 @@
                     return;
                 }
                 
-                container.innerHTML = publishedBlogs.map(blog => {
-                    const date = new Date(blog.date);
+                container.innerHTML = publishedNews.map(item => {
+                    const date = new Date(item.date);
                     const formattedDate = date.toLocaleDateString('en-US', { 
                         year: 'numeric', 
                         month: 'long', 
@@ -298,16 +294,16 @@
                     let videoId = null;
                     
                     // Determine if there's a video
-                    if (blog.video_url) {
-                        videoId = blog.video_url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/)?.[1];
+                    if (item.video_url) {
+                        videoId = item.video_url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/)?.[1];
                         if (videoId) {
                             hasVideo = true;
                         }
                     }
                     
                     // Determine thumbnail: use image if available, otherwise use video thumbnail
-                    if (blog.image_path) {
-                        thumbnailUrl = blog.image_path;
+                    if (item.image_path) {
+                        thumbnailUrl = item.image_path;
                     } else if (hasVideo) {
                         thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
                     }
@@ -315,9 +311,9 @@
                     // Build media HTML with play button overlay if there's a video
                     if (thumbnailUrl) {
                         mediaHtml = `
-                            <div class="news-featured-media" onclick="window.location.href='news-post.html?id=${blog.id}'" style="cursor: pointer;">
+                            <div class="news-featured-media" onclick="window.location.href='news-post.html?id=${item.id}'" style="cursor: pointer;">
                                 <img src="${thumbnailUrl}" 
-                                     alt="${blog.title}" 
+                                     alt="${item.title}" 
                                      class="news-featured-image">
                                 ${hasVideo ? '<div class="video-play-icon">▶</div>' : ''}
                             </div>
@@ -330,16 +326,16 @@
                             <div class="news-post-content-wrapper">
                                 <div>
                                     <div class="news-post-header">
-                                        <h2><a href="news-post.html?id=${blog.id}">${blog.title}</a></h2>
+                                        <h2><a href="news-post.html?id=${item.id}">${item.title}</a></h2>
                                         <div class="news-meta">
                                             <span class="news-meta-item">📅 ${formattedDate}</span>
-                                            <span class="news-meta-item">✍️ ${blog.author}</span>
-                                            <span class="news-category">${blog.category}</span>
+                                            <span class="news-meta-item">✍️ ${item.author}</span>
+                                            <span class="news-category">${item.category}</span>
                                         </div>
                                     </div>
-                                    <p class="news-excerpt">${blog.excerpt}</p>
+                                    <p class="news-excerpt">${item.excerpt}</p>
                                 </div>
-                                <a href="news-post.html?id=${blog.id}" class="read-more">Read More →</a>
+                                <a href="news-post.html?id=${item.id}" class="read-more">Read More →</a>
                             </div>
                         </article>
                     `;
@@ -355,8 +351,8 @@
             }
         }
         
-        // Load news posts when page loads
-        document.addEventListener('DOMContentLoaded', loadBlogPosts);
+        // Load latest news when page loads
+        document.addEventListener('DOMContentLoaded', loadLatestNews);
     </script>
 </body>
 </html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Doc Decoder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        #output {
+            margin-top: 30px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+            min-height: 100px;
+            display: none;
+        }
+        
+        #output.show {
+            display: block;
+        }
+        
+        .error {
+            color: #d32f2f;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .error.show {
+            display: block;
+        }
+        
+        .loading {
+            color: #1976d2;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .loading.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Google Doc Decoder</h1>
+        <p>This tool decodes Google Docs that contain ASCII art or grid-based text.</p>
+        
+        <div class="form-group">
+            <label for="url">Google Doc URL:</label>
+            <input 
+                type="text" 
+                id="url" 
+                value="https://docs.google.com/document/d/e/2PACX-1vSvM5gDlNvt7npYHhp_XfsJvuntUhq184By5xO_pA4b_gCWeXb6dM6ZxwN8rE6S4ghUsCj2VKR21oEP/pub"
+            >
+        </div>
+        
+        <button id="decodeBtn">Decode</button>
+        
+        <div class="loading" id="loading">Loading...</div>
+        <div class="error" id="error"></div>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        async function decodeGoogleDoc(url) {
+            // Use PHP proxy to bypass CORS
+            console.log("Original URL:", url);
+            
+            const proxyUrl = `/bulkleylaundry/api-decode-google-doc.php?url=${encodeURIComponent(url)}`;
+            console.log("Proxy URL:", proxyUrl);
+            
+            const response = await fetch(proxyUrl);
+            
+            console.log("Response status:", response.status);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const text = await response.text();
+            console.log("Fetched text length:", text.length);
+            console.log("First 200 chars:", text.substring(0, 200));
+
+            const grid = {};
+            let maxX = 0;
+            let maxY = 0;
+
+            const lines = text.split("\n");
+
+            for (const line of lines) {
+                const parts = line.trim().split(/\s+/);
+
+                // Expects 3 columns x, char, y
+                if (parts.length !== 3) continue;
+
+                const [xStr, char, yStr] = parts;
+
+                // skips the header or broken rows
+                if (isNaN(parseInt(xStr)) || isNaN(parseInt(yStr))) continue;
+
+                const x = parseInt(xStr);
+                const y = parseInt(yStr);
+
+                grid[`${x},${y}`] = char;
+
+                if (x > maxX) maxX = x;
+                if (y > maxY) maxY = y;
+            }
+
+            // prints the secret code
+            let result = "";
+            for (let y = 0; y <= maxY; y++) {
+                let row = "";
+                for (let x = 0; x <= maxX; x++) {
+                    row += grid[`${x},${y}`] || " ";
+                }
+                result += row + "\n";
+                console.log(row);
+            }
+            
+            return result;
+        }
+
+        const decodeBtn = document.getElementById("decodeBtn");
+        const urlInput = document.getElementById("url");
+        const outputDiv = document.getElementById("output");
+        const errorDiv = document.getElementById("error");
+        const loadingDiv = document.getElementById("loading");
+
+        decodeBtn.addEventListener("click", async () => {
+            const url = urlInput.value.trim();
+            
+            if (!url) {
+                errorDiv.textContent = "Please enter a valid Google Doc URL.";
+                errorDiv.classList.add("show");
+                return;
+            }
+            
+            errorDiv.classList.remove("show");
+            loadingDiv.classList.add("show");
+            outputDiv.classList.remove("show");
+            decodeBtn.disabled = true;
+
+            try {
+                const result = await decodeGoogleDoc(url);
+                outputDiv.textContent = result;
+                outputDiv.classList.add("show");
+            } catch (err) {
+                errorDiv.textContent = "Error: " + err.message;
+                errorDiv.classList.add("show");
+                console.error(err);
+            } finally {
+                loadingDiv.classList.remove("show");
+                decodeBtn.disabled = false;
+            }
+        });
+
+        // Allow Enter key to trigger decode
+        urlInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                decodeBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>

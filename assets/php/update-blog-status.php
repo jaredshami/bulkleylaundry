@@ -1,5 +1,5 @@
 <?php
-// update-blog-status.php - Backend to update news article published status
+// update-latest-news-status.php - Backend to update latest news article published status
 
 header('Content-Type: application/json');
 
@@ -30,31 +30,31 @@ if (!isset($data['id']) || !isset($data['published'])) {
 $blog_id = intval($data['id']);
 $published = (bool)$data['published'];
 
-// Path to the blogs.json file
-$blogs_file = dirname(__FILE__) . '/../data/blogs.json';
+// Path to the latest news data file
+$news_file = dirname(__FILE__) . '/../data/latest-news.json';
 
 // Check if file exists
-if (!file_exists($blogs_file)) {
+if (!file_exists($news_file)) {
     http_response_code(404);
-    echo json_encode(['error' => 'Blogs file not found']);
+    echo json_encode(['error' => 'Latest news file not found']);
     exit;
 }
 
-// Read existing blogs
-$existing_data = file_get_contents($blogs_file);
-$blogs = json_decode($existing_data, true);
+// Read existing news items
+$existing_data = file_get_contents($news_file);
+$news_items = json_decode($existing_data, true);
 
-if (!is_array($blogs)) {
+if (!is_array($news_items)) {
     http_response_code(500);
-    echo json_encode(['error' => 'Invalid blogs data format']);
+    echo json_encode(['error' => 'Invalid latest news data format']);
     exit;
 }
 
-// Find and update the blog
+// Find and update the news item
 $found = false;
-foreach ($blogs as &$blog) {
-    if ($blog['id'] === $blog_id) {
-        $blog['published'] = $published;
+foreach ($news_items as &$item) {
+    if ($item['id'] === $blog_id) {
+        $item['published'] = $published;
         $found = true;
         break;
     }
@@ -62,23 +62,23 @@ foreach ($blogs as &$blog) {
 
 if (!$found) {
     http_response_code(404);
-    echo json_encode(['error' => 'Blog not found']);
+    echo json_encode(['error' => 'News item not found']);
     exit;
 }
 
-// Save updated blogs
-$blogs_output = json_encode($blogs, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-$write_result = file_put_contents($blogs_file, $blogs_output);
+// Save updated news items
+$news_output = json_encode($news_items, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+$write_result = file_put_contents($news_file, $news_output);
 
 if ($write_result === false) {
     http_response_code(500);
-    echo json_encode(['error' => 'Failed to update blogs file. Check file permissions.']);
+    echo json_encode(['error' => 'Failed to update latest news file. Check file permissions.']);
     exit;
 }
 
 http_response_code(200);
 echo json_encode([
     'success' => true,
-    'message' => 'Blog status updated successfully'
+    'message' => 'Latest news status updated successfully'
 ]);
 ?>

@@ -19,35 +19,9 @@ if (hamburger && navMenu) {
 }
 
 // ========================================
-// FORM SUBMISSION
+// FORM SUBMISSION - Handled in contact.html
 // ========================================
 
-const contactForm = document.querySelector('.contact-form');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const name = contactForm.querySelector('input[type="text"]').value;
-        const email = contactForm.querySelector('input[type="email"]').value;
-        const phone = contactForm.querySelector('input[type="tel"]').value;
-        const message = contactForm.querySelector('textarea').value;
-        
-        // Here you would typically send this data to a server
-        console.log({
-            name,
-            email,
-            phone,
-            message
-        });
-        
-        // Show success message
-        alert(`Thank you, ${name}! We'll get back to you soon at ${email}.`);
-        
-        // Reset form
-        contactForm.reset();
-    });
-}
 
 // ========================================
 // SMOOTH SCROLL ENHANCEMENT

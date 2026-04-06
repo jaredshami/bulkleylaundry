@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Affordable laundry service pricing at Bulkley Laundry. Competitive rates for wash & fold, dry cleaning, alterations, and more in Bulkley Valley, BC.">
-    <meta name="keywords" content="laundry prices, dry cleaning cost, wash and fold pricing, alteration prices, Bulkley Valley">
+    <meta name="description" content="Affordable laundry service pricing at Bulkley Laundry. Competitive rates for wash & fold, dry cleaning, alterations, and more in Tooele Valley and surrounding areas.">
+    <meta name="keywords" content="laundry prices, dry cleaning cost, wash and fold pricing, alteration prices, Tooele Valley">
     <meta property="og:title" content="Pricing - Bulkley Laundry">
     <meta property="og:description" content="Transparent pricing for all our premium laundry services.">
     <meta property="og:url" content="https://bulkleylaundry.com/pricing.html">
@@ -13,15 +13,24 @@
     <link rel="canonical" href="https://bulkleylaundry.com/pricing.html">
     <link rel="stylesheet" href="assets/css/styles.css">
     
+    <style>
+        .featured-discount {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    </style>
+    
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "PriceSpecification",
       "priceCurrency": "CAD",
       "offers": [
-        {"name": "Wash & Fold", "price": "1.50", "unitCode": "LB"},
-        {"name": "Dry Cleaning", "price": "5.00", "unitCode": "ITEM"},
-        {"name": "Pickup & Delivery", "price": "8.00"}
+        {"name": "Self-Service Laundromat (30lb)", "price": "3.00", "unitCode": "LOAD"},
+        {"name": "Wash, Dry & Fold (In Town)", "price": "1.44", "unitCode": "LB"},
+        {"name": "Wash, Dry & Fold (Out of Town)", "price": "1.64", "unitCode": "LB"},
+        {"name": "Dryers", "price": "1.50", "unitCode": "UNIT"},
+        {"name": "Dry Cleaning", "price": "Variable", "unitCode": "ITEM"}
       ]
     }
     </script>
@@ -74,7 +83,7 @@
     <!-- Page Header Background Image -->
     <style>
         .page-header {
-            background-image: url('assets/images/hero/hero-pricing.jpg');
+            background-image: url('assets/images/soap-suds.png');
             background-size: cover;
             background-position: center;
         }
@@ -84,25 +93,39 @@
     <section class="pricing-section">
         <div class="container">
             <div class="pricing-grid">
-                <!-- Wash & Fold -->
+                <!-- Self-Service Laundromat -->
                 <div class="pricing-card">
-                    <h3>Wash & Fold</h3>
-                    <p class="price">$1.50<span>/lb</span></p>
+                    <h3>Self-Service Laundromat</h3>
+                    <p class="price">From $3<span>/load</span></p>
                     <ul>
-                        <li>Professional washing</li>
-                        <li>Careful sorting & folding</li>
-                        <li>Fresh scent finishing</li>
-                        <li>2-3 day turnaround</li>
-                        <li>Stain treatment included</li>
+                        <li>30lb Washer - $3.00</li>
+                        <li>40lb Washer - $4.50</li>
+                        <li>60lb Washer - $9.00</li>
+                        <li>Dryers - $1.50 for 42 min</li>
+                        <li>Modern, well-maintained equipment</li>
                     </ul>
-                    <a href="contact.html" class="btn btn-secondary">Order Now</a>
+                    <a href="services/self-service.html" class="btn btn-secondary">Visit Us</a>
                 </div>
 
-                <!-- Dry Cleaning - Featured -->
+                <!-- Wash, Dry & Fold - Featured -->
                 <div class="pricing-card featured">
                     <div class="badge">Most Popular</div>
+                    <h3>Wash, Dry & Fold</h3>
+                    <p class="price">$1.44-$1.64<span>/lb</span></p>
+                    <ul>
+                        <li>In Town - $1.44/lb</li>
+                        <li>Out of Town - $1.64/lb</li>
+                        <li>Professional washing</li>
+                        <li>Included pick up & delivery</li>
+                        <li>2-3 day turnaround</li>
+                    </ul>
+                    <a href="services/wash-fold.html" class="btn btn-primary">Order Now</a>
+                </div>
+
+                <!-- Dry Cleaning -->
+                <div class="pricing-card">
                     <h3>Professional Dry Cleaning</h3>
-                    <p class="price">From $5<span>/item</span></p>
+                    <p class="price">Variable<span>/item</span></p>
                     <ul>
                         <li>Expert stain removal</li>
                         <li>Eco-friendly solvents</li>
@@ -110,21 +133,7 @@
                         <li>Premium pressing</li>
                         <li>3-5 day turnaround</li>
                     </ul>
-                    <a href="contact.html" class="btn btn-primary">Order Now</a>
-                </div>
-
-                <!-- Pickup & Delivery -->
-                <div class="pricing-card">
-                    <h3>Pickup & Delivery</h3>
-                    <p class="price">$8<span>/service</span></p>
-                    <ul>
-                        <li>Free within 5 miles</li>
-                        <li>Scheduled collection</li>
-                        <li>Same-day delivery available</li>
-                        <li>Secure transport</li>
-                        <li>FREE on orders over $50</li>
-                    </ul>
-                    <a href="contact.html" class="btn btn-secondary">Schedule Now</a>
+                    <a href="services/dry-cleaning.html" class="btn btn-secondary">View Pricing</a>
                 </div>
             </div>
         </div>
@@ -135,21 +144,36 @@
         <div class="container">
             <h2>Price Calculator</h2>
             
+            <!-- Wash n Fold -->
+            <div class="pricing-category">
+                <h3>Wash n Fold Service</h3>
+                <div class="pricing-list">
+                    <div class="pricing-item">
+                        <span>Wash n Fold</span>
+                        <span class="price">$3.54/lb</span>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Tops -->
             <div class="pricing-category">
                 <h3>Tops</h3>
                 <div class="pricing-list">
                     <div class="pricing-item">
-                        <span>All Shirts (Men's and Women's)</span>
-                        <span class="price">$1.97</span>
+                        <span>Shirts (Standard)</span>
+                        <span class="price">$4.12</span>
+                    </div>
+                    <div class="pricing-item">
+                        <span>Shirts (Premium)</span>
+                        <span class="price">$4.14</span>
                     </div>
                     <div class="pricing-item">
                         <span>Blouses</span>
-                        <span class="price">$4.97</span>
+                        <span class="price">$7.24</span>
                     </div>
                     <div class="pricing-item">
                         <span>Sweaters</span>
-                        <span class="price">$4.97</span>
+                        <span class="price">$7.74</span>
                     </div>
                     <div class="pricing-item">
                         <span>Vests</span>
@@ -168,7 +192,11 @@
                 <div class="pricing-list">
                     <div class="pricing-item">
                         <span>Pants</span>
-                        <span class="price">$4.97</span>
+                        <span class="price">$7.74</span>
+                    </div>
+                    <div class="pricing-item">
+                        <span>Jeans</span>
+                        <span class="price">$9.84</span>
                     </div>
                     <div class="pricing-item">
                         <span>Skirts</span>
@@ -186,6 +214,18 @@
                 <h3>Full-Body</h3>
                 <div class="pricing-list">
                     <div class="pricing-item">
+                        <span>Suits</span>
+                        <span class="price">$15.94</span>
+                    </div>
+                    <div class="pricing-item">
+                        <span>Dress</span>
+                        <span class="price">$15.44</span>
+                    </div>
+                    <div class="pricing-item">
+                        <span>Wedding Dress</span>
+                        <span class="price">$144.44</span>
+                    </div>
+                    <div class="pricing-item">
                         <span>Dress (Casual)</span>
                         <span class="price">$9.97</span>
                     </div>
@@ -195,7 +235,7 @@
                     </div>
                     <div class="pricing-item">
                         <span>Coats</span>
-                        <span class="price">$6.97</span>
+                        <span class="price">$18.44</span>
                     </div>
                     <div class="pricing-item">
                         <span>Cover Coat</span>
@@ -230,7 +270,11 @@
                     </div>
                     <div class="pricing-item">
                         <span>Blankets</span>
-                        <span class="price">$9.99</span>
+                        <span class="price">$29.44</span>
+                    </div>
+                    <div class="pricing-item">
+                        <span>Comforters/Duvet (Twin)</span>
+                        <span class="price">$27.44</span>
                     </div>
                     <div class="pricing-item">
                         <span>Comforters/Duvet</span>
@@ -275,28 +319,10 @@
     <!-- Bulk Discounts -->
     <section class="discounts-section">
         <div class="container">
-            <h2>Special Offers & Discounts</h2>
-            <div class="discount-grid">
-                <div class="discount-card">
-                    <h3>📦 First-Time Customer</h3>
-                    <p><strong>10% OFF</strong> your first order</p>
-                    <p>Use code: WELCOME10</p>
-                </div>
-                <div class="discount-card">
-                    <h3>🔄 Loyalty Program</h3>
-                    <p><strong>Earn rewards</strong> on every purchase</p>
-                    <p>1% back on all services</p>
-                </div>
-                <div class="discount-card">
-                    <h3>📦 Bulk Orders</h3>
-                    <p><strong>Orders over $100</strong> get 5% off</p>
-                    <p>Save more when you order more</p>
-                </div>
-                <div class="discount-card">
-                    <h3>🚚 Free Delivery</h3>
-                    <p><strong>FREE P&D</strong> on orders over $50</p>
-                    <p>Within 5-mile service area</p>
-                </div>
+            <div class="discount-card featured-discount">
+                <h3>🎉 First-Time Customer Special</h3>
+                <p class="discount-amount"><strong>7% OFF</strong> your first order</p>
+                <p class="discount-code">Use code: <strong>FIRST7</strong></p>
             </div>
         </div>
     </section>

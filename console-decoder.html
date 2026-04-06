@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Console Decoder</title>
+</head>
+<body>
+    <p>Open DevTools Console (F12) and the function will run automatically.</p>
+    
+    <script>
+        async function decodeGoogleDoc(url) {
+          // For /e/ format docs, fetch the HTML directly and parse
+          let fetchUrl = url;
+          
+          console.log("Fetching from:", fetchUrl);
+          
+          let text = "";
+          
+          try {
+            // Try CORS proxy for HTML
+            const corsUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(fetchUrl)}`;
+            const response = await fetch(corsUrl);
+            if (response.ok) {
+              const html = await response.text();
+              console.log("HTML fetched, length:", html.length);
+              
+              // Extract all text content from the HTML - look for actual document text
+              // Remove script tags first
+              let cleanHtml = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+              
+              // Extract text between tags
+              let textContent = cleanHtml.replace(/<[^>]+>/g, ' ');
+              
+              // Decode HTML entities
+              const textarea = document.createElement('textarea');
+              textarea.innerHTML = textContent;
+              text = textarea.value;
+              
+              console.log("Extracted text, length:", text.length);
+              console.log("First 1000 chars:", text.substring(0, 1000));
+            }
+          } catch (e) {
+            console.error("Fetch failed:", e);
+          }
+
+          const grid = {};
+          let maxX = 0;
+          let maxY = 0;
+
+          const lines = text.split("\n");
+          console.log("Processing", lines.length, "lines");
+          
+          let foundCount = 0;
+
+          for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed || trimmed.length < 3) continue;
+            
+            // Look for pattern: number(s) space character(s) space number(s)
+            const match = trimmed.match(/^(\d+)\s+(\S)\s+(\d+)$/);
+            if (match) {
+              const x = parseInt(match[1]);
+              const y = parseInt(match[3]);
+              const char = match[2];
+              
+              grid[`${x},${y}`] = char;
+              foundCount++;
+              
+              if (x > maxX) maxX = x;
+              if (y > maxY) maxY = y;
+            }
+          }
+
+          console.log("Found", foundCount, "coordinates. Max X:", maxX, "Max Y:", maxY);
+          
+          if (foundCount === 0) {
+            console.log("Warning: No coordinates found in parsed text");
+            // Try alternative parsing - look for any line with 3 space-separated tokens where first and last are numbers
+            for (const line of lines) {
+              const trimmed = line.trim();
+              if (!trimmed) continue;
+              
+              const parts = trimmed.split(/\s+/);
+              if (parts.length >= 3 && !isNaN(parseInt(parts[0])) && !isNaN(parseInt(parts[parts.length-1]))) {
+                const x = parseInt(parts[0]);
+                const y = parseInt(parts[parts.length - 1]);
+                const char = parts[1];
+                
+                grid[`${x},${y}`] = char;
+                foundCount++;
+                
+                if (x > maxX) maxX = x;
+                if (y > maxY) maxY = y;
+              }
+            }
+            console.log("Alternative parse found", foundCount, "coordinates");
+          }
+          
+          console.log("\n=== SECRET MESSAGE ===\n");
+          
+          // prints the secret code
+          for (let y = 0; y <= maxY; y++) {
+            let row = "";
+            for (let x = 0; x <= maxX; x++) {
+              row += grid[`${x},${y}`] || " ";
+            }
+            console.log(row);
+          }
+        }
+
+        // Run it
+        decodeGoogleDoc("https://docs.google.com/document/d/e/2PACX-1vSvM5gDlNvt7npYHhp_XfsJvuntUhq184By5xO_pA4b_gCWeXb6dM6ZxwN8rE6S4ghUsCj2VKR21oEP/pub").catch(err => console.error("Error:", err));
+    </script>
+</body>
+</html>

@@ -29,8 +29,8 @@ if (!isset($data['id'])) {
 
 $news_id = intval($data['id']);
 
-// Update index file - path to the main blogs.json file
-$index_file = dirname(__FILE__) . '/../data/blogs.json';
+// Update index file - path to the main latest news file
+$index_file = dirname(__FILE__) . '/../data/latest-news.json';
 
 // Check if file exists
 if (!file_exists($index_file)) {

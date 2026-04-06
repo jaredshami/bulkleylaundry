@@ -1,1 +1,11 @@
-[]
+[
+    {
+        "id": 1,
+        "author": "Jared",
+        "title": "Test",
+        "rating": 5,
+        "text": "Test This is a test",
+        "approved": true,
+        "date": "2026-03-11"
+    }
+]
