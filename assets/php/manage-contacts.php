@@ -70,6 +70,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
             
+            // Send email to admin
+            $admin_email = 'bulkleylaundry@gmail.com';
+            $subject = "New Contact Form Submission from {$newContact['name']}";
+            
+            $email_body = "New Contact Form Submission\n\n";
+            $email_body .= "Name: {$newContact['name']}\n";
+            $email_body .= "Email: {$newContact['email']}\n";
+            if (!empty($newContact['phone'])) {
+                $email_body .= "Phone: {$newContact['phone']}\n";
+            }
+            if (!empty($newContact['service'])) {
+                $email_body .= "Service Interest: {$newContact['service']}\n";
+            }
+            $email_body .= "Date: {$newContact['date']}\n";
+            $email_body .= "Subscribe to Newsletter: " . ($newContact['subscribe'] ? 'Yes' : 'No') . "\n\n";
+            $email_body .= "Message:\n";
+            $email_body .= "{$newContact['message']}\n\n";
+            $email_body .= "---\n";
+            $email_body .= "Reply to: {$newContact['email']}\n";
+            
+            $headers = "From: noreply@bulkleylaundry.com\r\n";
+            $headers .= "Reply-To: {$newContact['email']}\r\n";
+            $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+            
+            // Send email (non-blocking)
+            mail($admin_email, $subject, $email_body, $headers);
+            
             // Send response immediately before file write
             http_response_code(200);
             echo json_encode(['success' => true, 'message' => 'Contact form submitted successfully']);
